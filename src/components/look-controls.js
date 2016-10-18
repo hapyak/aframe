@@ -98,15 +98,17 @@ module.exports.Component = registerComponent('look-controls', {
       return;
     }
 
+    // HapYak change by Nick Leoutsakos to mouse events.
     // Mouse Events
     canvasEl.addEventListener('mousedown', this.onMouseDown, false);
-    window.addEventListener('mousemove', this.onMouseMove, false);
-    window.addEventListener('mouseup', this.releaseMouse, false);
+    document.body.addEventListener('mousemove', this.onMouseMove, false);
+    document.body.addEventListener('mouseup', this.releaseMouse, false);
+    // canvasEl.addEventListener('mouseout', this.releaseMouse, false);
 
     // Touch events
     canvasEl.addEventListener('touchstart', this.onTouchStart);
-    window.addEventListener('touchmove', this.onTouchMove);
-    window.addEventListener('touchend', this.onTouchEnd);
+    document.body.addEventListener('touchmove', this.onTouchMove);
+    canvasEl.addEventListener('touchend', this.onTouchEnd);
   },
 
   removeEventListeners: function () {
@@ -114,15 +116,16 @@ module.exports.Component = registerComponent('look-controls', {
     var canvasEl = sceneEl && sceneEl.canvas;
     if (!canvasEl) { return; }
 
+    // HapYak change by Nick Leoutsakos to mouse events.
     // Mouse Events
     canvasEl.removeEventListener('mousedown', this.onMouseDown);
-    canvasEl.removeEventListener('mousemove', this.onMouseMove);
-    canvasEl.removeEventListener('mouseup', this.releaseMouse);
-    canvasEl.removeEventListener('mouseout', this.releaseMouse);
+    document.body.removeEventListener('mousemove', this.onMouseMove);
+    document.body.removeEventListener('mouseup', this.releaseMouse);
+    // canvasEl.removeEventListener('mouseout', this.releaseMouse);
 
     // Touch events
     canvasEl.removeEventListener('touchstart', this.onTouchStart);
-    canvasEl.removeEventListener('touchmove', this.onTouchMove);
+    document.body.removeEventListener('touchmove', this.onTouchMove);
     canvasEl.removeEventListener('touchend', this.onTouchEnd);
   },
 
